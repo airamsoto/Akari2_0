@@ -4,7 +4,6 @@ void iniciaListaPosiciones (tListaPosiciones& lp) {
     lp.cont = 0;
     lp.size = DIM;
     lp.arrayPos = new tPosicion [DIM];
-
 }
 
 void destruyeListaPosiciones (tListaPosiciones& lp) {
@@ -36,9 +35,6 @@ tPosicion dameElem (const tListaPosiciones& lp, int i) {
 
 void guardarListaBombilla  (ofstream& archivo, const tListaPosiciones& lp) {
     for (int i = 0; i < lp.cont; i++) {
-        archivo << lp.arrayPos[i].x << " " << lp.arrayPos[i].y;
-        //seguido de tantas lineas como posiciones haya en las lineas
-
-
+        archivo << dameX(lp.arrayPos[i]) << " " << dameY(lp.arrayPos[i]) << endl;
     }
 }

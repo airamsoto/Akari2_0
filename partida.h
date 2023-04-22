@@ -6,6 +6,8 @@
 #define AKARI2_0_PARTIDA_H
 
 #include "listaPosiciones.h"
+#include "tablero.h"
+#include "reglasJuego.h"
 
 typedef struct{
     tTablero tablero;

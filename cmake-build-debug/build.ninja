@@ -91,6 +91,12 @@ build CMakeFiles/Akari2_0.dir/celda.cpp.obj: CXX_COMPILER__Akari2_0_Debug C$:/Us
   OBJECT_DIR = CMakeFiles\Akari2_0.dir
   OBJECT_FILE_DIR = CMakeFiles\Akari2_0.dir
 
+build CMakeFiles/Akari2_0.dir/listaPartidas.cpp.obj: CXX_COMPILER__Akari2_0_Debug C$:/Users/airam/CLionProjects/Akari2.0/listaPartidas.cpp || cmake_object_order_depends_target_Akari2_0
+  DEP_FILE = CMakeFiles\Akari2_0.dir\listaPartidas.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Akari2_0.dir
+  OBJECT_FILE_DIR = CMakeFiles\Akari2_0.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Akari2_0
@@ -99,7 +105,7 @@ build CMakeFiles/Akari2_0.dir/celda.cpp.obj: CXX_COMPILER__Akari2_0_Debug C$:/Us
 #############################################
 # Link the executable Akari2_0.exe
 
-build Akari2_0.exe: CXX_EXECUTABLE_LINKER__Akari2_0_Debug CMakeFiles/Akari2_0.dir/main.cpp.obj CMakeFiles/Akari2_0.dir/posicion.cpp.obj CMakeFiles/Akari2_0.dir/listaPosiciones.cpp.obj CMakeFiles/Akari2_0.dir/partida.cpp.obj CMakeFiles/Akari2_0.dir/tablero.cpp.obj CMakeFiles/Akari2_0.dir/reglasJuego.cpp.obj CMakeFiles/Akari2_0.dir/celda.cpp.obj
+build Akari2_0.exe: CXX_EXECUTABLE_LINKER__Akari2_0_Debug CMakeFiles/Akari2_0.dir/main.cpp.obj CMakeFiles/Akari2_0.dir/posicion.cpp.obj CMakeFiles/Akari2_0.dir/listaPosiciones.cpp.obj CMakeFiles/Akari2_0.dir/partida.cpp.obj CMakeFiles/Akari2_0.dir/tablero.cpp.obj CMakeFiles/Akari2_0.dir/reglasJuego.cpp.obj CMakeFiles/Akari2_0.dir/celda.cpp.obj CMakeFiles/Akari2_0.dir/listaPartidas.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Akari2_0.dir

@@ -20,7 +20,7 @@ bool esBombilla(const tCelda& c);
 bool estaApagada(const tCelda& c);
 bool estaIluminada(const tCelda& c);
 void apagaCelda(tCelda& c);
-void actualizaIluminaciónCelda(tCelda& c, bool iluminar);
+void actualizaIluminacionCelda(tCelda& c, bool iluminar);
 void ponBombilla(tCelda& c);
 
 #endif //AKARI2_0_CELDA_H

@@ -1,5 +1,85 @@
 #include "reglasJuego.h"
 using namespace std;
+int bombillasAlosLados(const tTablero& tab, int x, int y) {
+    int bombillas = 0;
+    if (esBombilla(celdaEnPos(tab, x + 1, y))) {
+        bombillas += 1;
+    }
+    else if (esBombilla(celdaEnPos(tab, x, y + 1))) {
+        bombillas += 1;
+    }
+    else if (esBombilla(celdaEnPos(tab, x - 1, y))) {
+        bombillas += 1;
+    }
+    else if (esBombilla(celdaEnPos(tab, x, y - 1))) {
+        bombillas += 1;
+    }
+    return bombillas;
+}
+void direccionIluminacion(tTablero& tab, int x, int y, tDir cardinal, bool iluminar) {
+    tCelda c;
+    c = celdaEnPos(tab, x, y);
+
+
+    int fila, col;
+
+
+    if (cardinal == NORTE) {
+        fila = x - 1;
+        col = y;
+        while (!esPared(celdaEnPos(tab, fila, col)) && fila >= 0) {
+            c = celdaEnPos(tab, fila, col);
+            actualizaIluminacionCelda(c, iluminar);
+            ponCeldaEnPos(tab, fila, col, c);
+            fila -= 1;
+        }
+
+    }
+    else {
+        if (cardinal == SUR) {
+            fila = x + 1;
+            col = y;
+            while (!esPared(celdaEnPos(tab, fila, col)) && fila < getNumCols(tab)) {
+                c = celdaEnPos(tab, fila, col);
+                actualizaIluminacionCelda(c, iluminar);
+                ponCeldaEnPos(tab, fila, col, c);
+                fila += 1;
+            }
+        }
+        else {
+            if (cardinal == ESTE) {
+                fila = x;
+                col = y + 1;
+                while (!esPared(celdaEnPos(tab, fila, col)) && col < getNumFilas(tab)) {
+                    c = celdaEnPos(tab, fila, col);
+                    actualizaIluminacionCelda(c, iluminar);
+                    ponCeldaEnPos(tab, fila, col, c);
+                    col += 1;
+                }
+            }
+            else {
+                if (cardinal == OESTE) {
+                    fila = x;
+                    col = y - 1;
+                    while (!esPared(celdaEnPos(tab, fila, col)) && col >= 0) {
+                        c = celdaEnPos(tab, fila, col);
+                        actualizaIluminacionCelda(c, iluminar);
+                        ponCeldaEnPos(tab, fila, col, c);
+                        col -= 1;
+                    }
+                }
+            }
+        }
+    }
+}
+void iluminaCruz(tTablero& tab, int x, int y, bool iluminar) {
+    direccionIluminacion(tab, x, y, NORTE, iluminar);
+    direccionIluminacion(tab, x, y, SUR, iluminar);
+    direccionIluminacion(tab, x, y, ESTE, iluminar);
+    direccionIluminacion(tab, x, y, OESTE, iluminar);
+}
+
+
 
 bool estaTerminado(tTablero const& tab) {
     bool ok = true;
@@ -21,22 +101,7 @@ bool estaTerminado(tTablero const& tab) {
     }
     return ok;
 }
-int bombillasAlosLados(const tTablero& tab, int x, int y) {
-    int bombillas = 0;
-    if (esBombilla(celdaEnPos(tab, x + 1, y))) {
-        bombillas += 1;
-    }
-    else if (esBombilla(celdaEnPos(tab, x, y + 1))) {
-        bombillas += 1;
-    }
-    else if (esBombilla(celdaEnPos(tab, x - 1, y))) {
-        bombillas += 1;
-    }
-    else if (esBombilla(celdaEnPos(tab, x, y - 1))) {
-        bombillas += 1;
-    }
-    return bombillas;
-}
+
 bool esPosQuit(int x, int y) {
     return (x == -1 && y == 0);
 }
@@ -57,66 +122,5 @@ void ejecutarPos(tTablero& tab, int x, int y) {
     }
 }
 
-void iluminaCruz(tTablero& tab, int x, int y, bool iluminar) {
-    direccionIluminacion(tab, x, y, NORTE, iluminar);
-    direccionIluminacion(tab, x, y, SUR, iluminar);
-    direccionIluminacion(tab, x, y, ESTE, iluminar);
-    direccionIluminacion(tab, x, y, OESTE, iluminar);
-}
-
-void direccionIluminacion(tTablero& tab, int x, int y, tDir cardinal, bool iluminar) {
-    tCelda c;
-    c = celdaEnPos(tab, x, y);
 
 
-    int fila, col;
-
-
-    if (cardinal == NORTE) {
-        fila = x - 1;
-        col = y;
-        while (!esPared(celdaEnPos(tab, fila, col)) && fila >= 0) {
-            c = celdaEnPos(tab, fila, col);
-            actualizaIluminaciónCelda(c, iluminar);
-            ponCeldaEnPos(tab, fila, col, c);
-            fila -= 1;
-        }
-
-    }
-    else {
-        if (cardinal == SUR) {
-            fila = x + 1;
-            col = y;
-            while (!esPared(celdaEnPos(tab, fila, col)) && fila < getNumCols(tab)) {
-                c = celdaEnPos(tab, fila, col);
-                actualizaIluminaciónCelda(c, iluminar);
-                ponCeldaEnPos(tab, fila, col, c);
-                fila += 1;
-            }
-        }
-        else {
-            if (cardinal == ESTE) {
-                fila = x;
-                col = y + 1;
-                while (!esPared(celdaEnPos(tab, fila, col)) && col < getNumFilas(tab)) {
-                    c = celdaEnPos(tab, fila, col);
-                    actualizaIluminaciónCelda(c, iluminar);
-                    ponCeldaEnPos(tab, fila, col, c);
-                    col += 1;
-                }
-            }
-            else {
-                if (cardinal == OESTE) {
-                    fila = x;
-                    col = y - 1;
-                    while (!esPared(celdaEnPos(tab, fila, col)) && col >= 0) {
-                        c = celdaEnPos(tab, fila, col);
-                        actualizaIluminaciónCelda(c, iluminar);
-                        ponCeldaEnPos(tab, fila, col, c);
-                        col -= 1;
-                    }
-                }
-            }
-        }
-    }
-}

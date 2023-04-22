@@ -86,7 +86,7 @@ void apagaCelda(tCelda& c) {
     c.numBombillas = 0;
 }
 
-void actualizaIluminaciónCelda(tCelda& c, bool iluminar) {
+void actualizaIluminacionCelda(tCelda& c, bool iluminar) {
     if (iluminar) {
         c.numBombillas++;
     }

@@ -31,23 +31,23 @@ tCelda charToCelda(char c) {
     }
     else if (c == '0') {
         celda.tipo = PARED;
-        celda.numBombillas = c;
+        celda.numBombillas = 0;
     }
     else if (c == '1') {
         celda.tipo = PARED;
-        celda.numBombillas = c;
+        celda.numBombillas = 1;
     }
     else if (c == '2') {
         celda.tipo = PARED;
-        celda.numBombillas = c;
+        celda.numBombillas = 2;
     }
     else if (c == '3') {
         celda.tipo = PARED;
-        celda.numBombillas = c;
+        celda.numBombillas = 3;
     }
     else if (c == '4') {
         celda.tipo = PARED;
-        celda.numBombillas = c;
+        celda.numBombillas = 4;
     }
     else if (c == ' ') {
         celda.tipo = PARED;

@@ -15,6 +15,7 @@ typedef struct {
     tCelda tablero[MAX_FILS][MAX_COLS];
 } tTablero;
 
+
 typedef enum tDir { NORTE, SUR, ESTE, OESTE };
 
 int getNumFilas(const tTablero& tab);
@@ -24,4 +25,7 @@ void ponCeldaEnPos(tTablero& tab, int x, int y, const tCelda& c);
 bool leerTablero(ifstream& archivo, tTablero& tab);
 void leerYColocarBombillas(ifstream& archivo, tTablero& tab);
 void mostrarTablero(const tTablero& tab);
+void iniciaTablero (tTablero& tablero);
+void destruyeTablero (tTablero& tablero);
+void cargarTablero (tTablero&tab, ifstream& archivo);
 #endif //AKARI2_0_TABLERO_H

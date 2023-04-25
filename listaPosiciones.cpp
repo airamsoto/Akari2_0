@@ -38,3 +38,21 @@ void guardarListaBombilla  (ofstream& archivo, const tListaPosiciones& lp) {
         archivo << dameX(lp.arrayPos[i]) << " " << dameY(lp.arrayPos[i]) << endl;
     }
 }
+
+void eliminar (tListaPosiciones& lp, const tPosicion& pos) { //CAMBIAR MIRAR BUSCAPOS
+    int i = 0;
+    int aux;
+    bool ya = false;
+    while (i < lp.cont && !ya) {
+        if (operator==(lp.arrayPos[i], pos)) {
+            ya = true;
+            aux = i;
+        } else {
+            i++;
+        }
+    }
+    for (int j = aux; j < lp.cont; j++) {
+        lp.arrayPos[aux] = lp.arrayPos[aux+1];
+    }
+    lp.cont--;
+}

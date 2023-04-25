@@ -77,3 +77,21 @@ void mostrarTablero(const tTablero& tab) {
         cout << "|" << endl;
     }
 }
+void iniciaTablero (tTablero& tablero) {
+    tablero.nFils = 0;
+    tablero.nCols = 0;
+}
+
+void destruyeTablero (tTablero& tablero) {
+    tablero.nFils = 0;
+    tablero.nCols = 0;
+}
+void cargarTablero (tTablero& tab, ifstream& archivo) {
+    char c;
+    for (int filas = 0; filas < getNumFilas(tab); filas++) {
+        for (int columnas = 0; columnas < getNumCols(tab); columnas++) {
+            archivo >> c;
+            ponCeldaEnPos(tab, filas, columnas, charToCelda(c));
+        }
+    }
+}

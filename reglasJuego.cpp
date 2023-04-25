@@ -5,13 +5,13 @@ int bombillasAlosLados(const tTablero& tab, int x, int y) {
     if (esBombilla(celdaEnPos(tab, x + 1, y))) {
         bombillas += 1;
     }
-    else if (esBombilla(celdaEnPos(tab, x, y + 1))) {
+    if (esBombilla(celdaEnPos(tab, x, y + 1))) {
         bombillas += 1;
     }
-    else if (esBombilla(celdaEnPos(tab, x - 1, y))) {
+    if (esBombilla(celdaEnPos(tab, x - 1, y))) {
         bombillas += 1;
     }
-    else if (esBombilla(celdaEnPos(tab, x, y - 1))) {
+    if (esBombilla(celdaEnPos(tab, x, y - 1))) {
         bombillas += 1;
     }
     return bombillas;

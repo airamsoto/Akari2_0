@@ -2,14 +2,22 @@
 void iniciaListaPartidas(tListaPartidas& listaPartidas) {
     listaPartidas.nElem = 0;
     for (int i = 0; i < MAX_PARTIDAS; i++) {
-        listaPartidas.datos[i] = *new tPtrPartida; //mirar si lo del asterisco esta bien
+        listaPartidas.datos[i] = new tPartida;
     }
 }
 void cargarListaPartidas(ifstream& archivo, tListaPartidas& listaPartidas) {
-    archivo >> listaPartidas.nElem;
-    for (int i = 0; i < listaPartidas.nElem; ++i) {
-        cargarPartida(archivo, *listaPartidas.datos[i]);
-    }
+    //archivo.open("partidas.txt");
+   // bool ok = false;
+    //if (archivo.is_open()) {
+        //ok = true;
+        archivo >> listaPartidas.nElem;
+        for (int i = 0; i < listaPartidas.nElem; ++i) {
+            cargarPartida(archivo, *listaPartidas.datos[i]);
+        }
+   // }
+
+        archivo.close();
+
 }
 
 void insertarOrd(tListaPartidas& listaPartidas, const tPartida& partida) {
@@ -25,10 +33,15 @@ void insertarOrd(tListaPartidas& listaPartidas, const tPartida& partida) {
 
 int buscaPos(const tListaPartidas& listaPartidas, int nivel) {
     int i = 0;
-    while(i < listaPartidas.nElem && !operator<(*listaPartidas.datos[i], nivel)) {
-        i++;
+    int pos = -1;
+    while(i < listaPartidas.nElem && pos == -1) {
+        if (operator<(*listaPartidas.datos[i], nivel)) {
+            pos = i;
+        } else {
+            i++;
+        }
     }
-    return i;
+    return pos;
 }
 tPtrPartida dameElem(const tListaPartidas& listaPartidas, int pos) {
     return listaPartidas.datos[buscaPos(listaPartidas, pos)];
@@ -37,11 +50,15 @@ tPtrPartida dameElem(const tListaPartidas& listaPartidas, int pos) {
 int dameNumElem(const tListaPartidas& listaPartidas) {
     return listaPartidas.nElem;
 }
-void eliminarPartida(tListaPartidas& listaPartidas, const tPartida partida) {
-    int i = 0;
-    //while (i < listaPartidas.nElem &&  ) algo de ponerla en el contador, reducir el contador y luego volver a ordenar la lista
 
+void eliminarPartida(tListaPartidas& listaPartidas, const tPartida partida) {
+    int pos = buscaPos(listaPartidas, partida.nivel);
+    for (int i = pos; i < listaPartidas.nElem; i++) {
+        listaPartidas.datos[i] = listaPartidas.datos[i+1];
+    }
+    listaPartidas.nElem--;
 }
+
 void guardarListaPartidas (ofstream& archivo, const tListaPartidas& listaPartidas) {
     archivo<< listaPartidas.nElem;
     for (int i = 0; i < listaPartidas.nElem; ++i) {
@@ -49,6 +66,7 @@ void guardarListaPartidas (ofstream& archivo, const tListaPartidas& listaPartida
     }
 
 }
+
 void destruyeListaPartidas(tListaPartidas& listaPartidas) {
     listaPartidas.nElem = 0;
     for (int i = 0; i < MAX_PARTIDAS; i++) {

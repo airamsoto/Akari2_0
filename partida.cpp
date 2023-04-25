@@ -2,16 +2,16 @@
 
 
 void iniciaPartida(tPartida& partida){
+    //partida.listaBombillas = *new tListaPosiciones; revisar funcion
     iniciaListaPosiciones(partida.listaBombillas);
+    iniciaTablero(partida.tablero);
 
 }
 void cargarPartida(ifstream& archivo, tPartida& partida){
     tTablero tablero;
-    archivo.open("partida.txt");
-    if(archivo.is_open()){
-        archivo >> partida.nivel;
-        leerTablero(archivo, tablero);
-    }
+    int basura;
+    archivo >> partida.nivel;
+    cargarTablero(partida.tablero, archivo);
 }
 bool operator<(const tPartida& partida, int nivel){
     return partida.nivel < nivel;
@@ -27,20 +27,27 @@ bool juega(tPartida& partida, int& nIt){
     cargarPartida(archivo, partida);
     leerYColocarBombillas(archivo, tablero);
     mostrarTablero(tablero);
+    bool termina = estaTerminado(tablero);
 
-    while (!estaTerminado(tablero)) {
+    while (!termina) {
         cout << "En caso de que desee abandonar la partida introtuzca las coordenadas (-1 0)" << endl;
         cout << "INTRUZCA UNAS COORDENADAS: ";
         cin >> x >> y;
         nIt++;
         if(esPosQuit(x,y)) {
             ok = true;
-            //estaTerminado(tablero) = true; da  un error al ponerlo a true no se porq
+            termina = true; //doble bool mirar si con uno estaria bien
             nIt--;
         } else {
             ejecutarPos(tablero, x, y);
             mostrarTablero(tablero);
             estaTerminado(tablero);
+
+        }
+    }
+    for (int i = 0; i < dameNumElem(partida.listaBombillas); i++) {
+        //dameNumElem(tablero, partida.listaBombillas)
+        if(esBombilla(celdaEnPos(tablero, getNumFilas(tablero), getNumCols(tablero)))) {
 
         }
     }
@@ -62,5 +69,6 @@ void guardarPartida (ofstream& archivo, const tPartida& partida) {
 
 void destruyePartida (tPartida& partida) {
     destruyeListaPosiciones(partida.listaBombillas);
+    destruyeTablero(partida.tablero);
 }
 

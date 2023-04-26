@@ -22,5 +22,6 @@ bool estaIluminada(const tCelda& c);
 void apagaCelda(tCelda& c);
 void actualizaIluminacionCelda(tCelda& c, bool iluminar);
 void ponBombilla(tCelda& c);
+char celdaToCharArchivo(const tCelda& celda);
 
 #endif //AKARI2_0_CELDA_H

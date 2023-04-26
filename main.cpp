@@ -13,33 +13,39 @@ int main() {
         cargarListaPartidas(archivo, listaPartidas);
         cout << "INTRODUCE EL NIVEL DE LA PARTIDA QUE QUIERAS JUGAR: ";
         cin >> n;
-        int pos = buscaPos(listaPartidas, n);
         if (buscaPos(listaPartidas, n) != -1) {
-            partida = *dameElem(listaPartidas, n);
+            partida = *dameElem(listaPartidas, buscaPos(listaPartidas, n));
         }
         else if(buscaPos(listaPartidas, n) == -1) {
-            int i = 0;
-            int aux = -2;
-            while (i < dameNumElem(listaPartidas) && aux == -2) { //falta mirar si se carga la partida con el -2
-                if (buscaPos(listaPartidas, n) != -1) {
-                    aux = i;
-                } else  {
-                    i++;
+            if ( operator<(*dameElem(listaPartidas, dameNumElem(listaPartidas)),  n)) {
+                partida = *dameElem(listaPartidas, dameNumElem(listaPartidas) - 1);
+            } else {
+                int i = n;
+                int aux = -2;
+                while (i < dameNumElem(listaPartidas) && aux == -2) { //falta mirar si se carga la partida con el -2
+                    if (buscaPos(listaPartidas, n) != -1) {
+                        aux = i;
+                    } else  {
+                        i++;
+                    }
                 }
+                partida = *dameElem(listaPartidas, buscaPos(listaPartidas, aux));
             }
-            partida = *dameElem(listaPartidas, aux);
-            //cargarPartida(archivo, *dameElem(listaPartidas, aux));
 
-        } else if ( operator<(*dameElem(listaPartidas, dameNumElem(listaPartidas)),  n)) {
-            //cargarPartida(archivo, *dameElem(listaPartidas, dameNumElem(listaPartidas)));
+
+
+        } /*else if ( operator<(*dameElem(listaPartidas, dameNumElem(listaPartidas)),  n)) {
             partida = *dameElem(listaPartidas, dameNumElem(listaPartidas));
-        }
-        cargarPartida(archivo, partida);
-        juega(partida, cont);
+        }*/
         if (juega(partida, cont)) {
             eliminarPartida(listaPartidas, partida);
-            guardarListaPartidas(archivoEscr, listaPartidas);
-            destruyeListaPartidas(listaPartidas);
+            archivoEscr.open("partidasNew.txt");
+            if (archivoEscr.is_open()) {
+                guardarListaPartidas(archivoEscr, listaPartidas);
+                destruyeListaPartidas(listaPartidas);
+            }
+            archivoEscr.close();
+
         }
     }
 

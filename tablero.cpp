@@ -46,7 +46,6 @@ void leerYColocarBombillas(ifstream& archivo, tTablero& tab) {
         archivo >> x >> y;
         ejecutarPos(tab, x, y);
     }
-    archivo.close();
 }
 
 void mostrarTablero(const tTablero& tab) {
@@ -88,6 +87,8 @@ void destruyeTablero (tTablero& tablero) {
 }
 void cargarTablero (tTablero& tab, ifstream& archivo) {
     char c;
+    archivo >> tab.nFils;
+    archivo >> tab.nCols;
     for (int filas = 0; filas < getNumFilas(tab); filas++) {
         for (int columnas = 0; columnas < getNumCols(tab); columnas++) {
             archivo >> c;

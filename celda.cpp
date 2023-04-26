@@ -1,18 +1,34 @@
 #include "celda.h"
 
 char celdaToChar(const tCelda& celda) {
-    char aux;
+    char aux = ' ';
+
     if (celda.tipo == BOMBILLA) {
         aux = '*';
     }
     else if (celda.tipo == PARED) {
-        aux = celda.numBombillas;
+        if (celda.numBombillas == 4) {
+            aux = '4';
+        }
+        else if (celda.numBombillas == 3) {
+            aux = '3';
+        }
+        else if (celda.numBombillas == 2) {
+            aux = '2';
+        }
+        else if (celda.numBombillas == 1) {
+            aux = '1';
+        }
+        else if (celda.numBombillas == 0) {
+            aux = '0';
+        }
+        else if (celda.numBombillas == -1) {
+            aux = ' ';
+        }
 
     }
-    else {
-        aux = ' ';
-    }
     return aux;
+
 }
 
 tCelda charToCelda(char c) {
@@ -96,4 +112,35 @@ void actualizaIluminacionCelda(tCelda& c, bool iluminar) {
 }
 void ponBombilla(tCelda& c) {
     c.tipo = BOMBILLA;
+}
+
+char celdaToCharArchivo(const tCelda& celda) {
+    char aux = '.';
+
+    if (celda.tipo == BOMBILLA) { //esto?
+        aux = '.';
+    }
+    else if (celda.tipo == PARED) {
+        if (celda.numBombillas == 4) {
+            aux = '4';
+        }
+        else if (celda.numBombillas == 3) {
+            aux = '3';
+        }
+        else if (celda.numBombillas == 2) {
+            aux = '2';
+        }
+        else if (celda.numBombillas == 1) {
+            aux = '1';
+        }
+        else if (celda.numBombillas == 0) {
+            aux = '0';
+        }
+        else if (celda.numBombillas == -1) {
+            aux = ' ';
+        }
+
+    }
+    return aux;
+
 }

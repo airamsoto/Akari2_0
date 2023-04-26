@@ -102,6 +102,10 @@ bool estaTerminado(tTablero const& tab) {
     return ok;
 }
 
+bool reset(int x, int y) {
+    return (x == -1 && y == -1);
+}
+
 bool esPosQuit(int x, int y) {
     return (x == -1 && y == 0);
 }

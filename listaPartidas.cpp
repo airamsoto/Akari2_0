@@ -6,18 +6,10 @@ void iniciaListaPartidas(tListaPartidas& listaPartidas) {
     }
 }
 void cargarListaPartidas(ifstream& archivo, tListaPartidas& listaPartidas) {
-    //archivo.open("partidas.txt");
-   // bool ok = false;
-    //if (archivo.is_open()) {
-        //ok = true;
         archivo >> listaPartidas.nElem;
         for (int i = 0; i < listaPartidas.nElem; ++i) {
             cargarPartida(archivo, *listaPartidas.datos[i]);
         }
-   // }
-
-        archivo.close();
-
 }
 
 void insertarOrd(tListaPartidas& listaPartidas, const tPartida& partida) {
@@ -35,7 +27,7 @@ int buscaPos(const tListaPartidas& listaPartidas, int nivel) {
     int i = 0;
     int pos = -1;
     while(i < listaPartidas.nElem && pos == -1) {
-        if (operator<(*listaPartidas.datos[i], nivel)) {
+        if (!operator<(*listaPartidas.datos[i], nivel)) {
             pos = i;
         } else {
             i++;
@@ -44,7 +36,7 @@ int buscaPos(const tListaPartidas& listaPartidas, int nivel) {
     return pos;
 }
 tPtrPartida dameElem(const tListaPartidas& listaPartidas, int pos) {
-    return listaPartidas.datos[buscaPos(listaPartidas, pos)];
+    return listaPartidas.datos[pos];
 }
 
 int dameNumElem(const tListaPartidas& listaPartidas) {
@@ -60,7 +52,7 @@ void eliminarPartida(tListaPartidas& listaPartidas, const tPartida partida) {
 }
 
 void guardarListaPartidas (ofstream& archivo, const tListaPartidas& listaPartidas) {
-    archivo<< listaPartidas.nElem;
+    archivo << listaPartidas.nElem << endl;
     for (int i = 0; i < listaPartidas.nElem; ++i) {
         guardarPartida(archivo, *listaPartidas.datos[i]);
     }

@@ -35,6 +35,7 @@ tPosicion dameElem (const tListaPosiciones& lp, int i) {
 
 void guardarListaBombilla  (ofstream& archivo, const tListaPosiciones& lp) {
     for (int i = 0; i < lp.cont; i++) {
+        archivo << dameNumElem(lp);
         archivo << dameX(lp.arrayPos[i]) << " " << dameY(lp.arrayPos[i]) << endl;
     }
 }

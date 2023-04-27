@@ -42,7 +42,8 @@ int main() {
             archivoEscr.open("partidasNew.txt");
             if (archivoEscr.is_open()) {
                 guardarListaPartidas(archivoEscr, listaPartidas);
-                destruyeListaPartidas(listaPartidas);
+                //no guarda las bombillas
+                destruyePartida(partida); //no se si hay que usar destruye listapartidas
             }
             archivoEscr.close();
 

@@ -137,7 +137,7 @@ char celdaToCharArchivo(const tCelda& celda) {
             aux = '0';
         }
         else if (celda.numBombillas == -1) {
-            aux = ' ';
+            aux = 'X';
         }
 
     }

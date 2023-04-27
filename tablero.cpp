@@ -40,7 +40,6 @@ bool leerTablero(ifstream& archivo, tTablero& tab) {
 }
 void leerYColocarBombillas(ifstream& archivo, tTablero& tab) {
     int numero_bombillas, x, y;
-
     archivo >> numero_bombillas;
     for (int b = 0; b < numero_bombillas; b++) {
         archivo >> x >> y;
@@ -50,30 +49,44 @@ void leerYColocarBombillas(ifstream& archivo, tTablero& tab) {
 
 void mostrarTablero(const tTablero& tab) {
     tCelda c;
+    //system("cls");
+    cout << "|";
     for (int i = 0; i < tab.nCols; i++) {
-        cout << BLUE << "   " << i << RESET;
+       ;
+        cout << BLUE << " " << i << RESET << " |";
     }
     cout << endl;
+    cout << "-+";
+    for (int i= 0; i < tab.nCols;i++ ) {
+        cout << "---+";
+    }
+    cout << endl;
+
     for (int filas = 0; filas < getNumFilas(tab); filas++) {
 
-        cout << "-+---+---+---+---+---+" << endl;
-        cout << BLUE << filas << RESET;
+        cout  << BLUE << filas << RESET << "|";
         for (int columnas = 0; columnas < getNumCols(tab); columnas++) {
 
             if (esPared(celdaEnPos(tab, filas, columnas))) {
-                cout << "| " << BG_BLACK << celdaToChar(celdaEnPos(tab, filas, columnas)) << RESET << " ";
+
+                cout  << BG_BLACK << " " << celdaToChar(celdaEnPos(tab, filas, columnas)) << " " << RESET << "|";
             }
             else {
                 if (esBombilla(celdaEnPos(tab, filas, columnas)) || estaIluminada(celdaEnPos(tab, filas, columnas))) {
-                    cout << "| " << BG_YELLOW << celdaToChar(celdaEnPos(tab, filas, columnas)) << RESET << " ";
+                    cout  << BG_YELLOW << " " << celdaToChar(celdaEnPos(tab, filas, columnas)) << " " << RESET << "|";
                 }
                 else {
-                    cout << "| " << BG_WHITE << celdaToChar(celdaEnPos(tab, filas, columnas)) << RESET << " ";
+                    cout  << BG_WHITE << " " << celdaToChar(celdaEnPos(tab, filas, columnas)) << " " << RESET << "|";
                 }
             }
 
         }
-        cout << "|" << endl;
+        cout << endl;
+        cout << "-+";
+        for (int i= 0; i < tab.nFils;i++ ) {
+            cout << "---+";
+        }
+        cout << endl;
     }
 }
 void iniciaTablero (tTablero& tablero) {

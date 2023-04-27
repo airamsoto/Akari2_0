@@ -2,6 +2,8 @@
 #ifndef AKARI2_0_COLOR_H
 #define AKARI2_0_COLOR_H
 //===Color fuente===//
+#define AKARI2_0_COLOR_H
+#include <stdlib.h>
 
 #define BLACK   "\x1B[30m"
 #define RED     "\x1b[31m"

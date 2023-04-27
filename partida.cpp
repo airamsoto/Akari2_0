@@ -24,9 +24,6 @@ bool operator<(const tPartida& partida1, const tPartida& partida2){
 bool juega(tPartida& partida, int& nIt){
     ifstream archivo;
     int x, y;
-    bool ok = false;
-    //cargarPartida(archivo, partida);
-    //cargarTablero(partida.tablero, archivo);
     leerYColocarBombillas(archivo, partida.tablero);
     mostrarTablero(partida.tablero);
     bool termina = estaTerminado(partida.tablero);
@@ -37,7 +34,6 @@ bool juega(tPartida& partida, int& nIt){
         cin >> x >> y;
         nIt++;
         if(esPosQuit(x,y)) {
-            ok = true;
             termina = true; //doble bool mirar si con uno estaria bien
             nIt--;
         } else {
@@ -49,14 +45,6 @@ bool juega(tPartida& partida, int& nIt){
                 mostrarTablero(partida.tablero);
                 termina = estaTerminado(partida.tablero);
             }
-
-
-        }
-    }
-    for (int i = 0; i < dameNumElem(partida.listaBombillas); i++) {
-        //dameNumElem(tablero, partida.listaBombillas)
-        if(esBombilla(celdaEnPos(partida.tablero, getNumFilas(partida.tablero), getNumCols(partida.tablero)))) {
-
         }
     }
     cout << "El numero de movimientos realizados es: " << nIt<< endl;

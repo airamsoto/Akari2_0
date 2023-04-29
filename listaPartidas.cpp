@@ -1,4 +1,5 @@
 #include "listaPartidas.h"
+
 void iniciaListaPartidas(tListaPartidas& listaPartidas) {
     listaPartidas.nElem = 0;
     for (int i = 0; i < MAX_PARTIDAS; i++) {
@@ -10,17 +11,19 @@ void cargarListaPartidas(ifstream& archivo, tListaPartidas& listaPartidas) {
         for (int i = 0; i < listaPartidas.nElem; ++i) {
             cargarPartida(archivo, *listaPartidas.datos[i]);
         }
+
 }
 
 void insertarOrd(tListaPartidas& listaPartidas, const tPartida& partida) {
    int i = listaPartidas.nElem;
    tPtrPartida punteroPartida = listaPartidas.datos[listaPartidas.nElem];
    *punteroPartida = partida;
-   while (operator<(*listaPartidas.datos[i - 1], partida) && i > 0) {
+   while ( i > 0 && !operator<(*listaPartidas.datos[i - 1], partida)) {
        listaPartidas.datos[i] = listaPartidas.datos[i-1];
        i--;
    }
    listaPartidas.datos[i] = punteroPartida;
+   listaPartidas.datos[i+1] = listaPartidas.datos[i+2];
 }
 
 int buscaPos(const tListaPartidas& listaPartidas, int nivel) {
@@ -57,12 +60,11 @@ void guardarListaPartidas (ofstream& archivo, const tListaPartidas& listaPartida
         guardarPartida(archivo, *listaPartidas.datos[i]);
     }
 
+
 }
 
 void destruyeListaPartidas(tListaPartidas& listaPartidas) {
-    listaPartidas.nElem = 0;
-    for (int i = 0; i < MAX_PARTIDAS; i++) {
-        delete listaPartidas.datos[i];
-        listaPartidas.datos[i] = nullptr;
+    for (int i = 0; i < listaPartidas.nElem;i++) {
+        destruyePartida(*listaPartidas.datos[i]);
     }
 }

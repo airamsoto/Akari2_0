@@ -1,11 +1,19 @@
 #include "partida.h"
 
-
+void almacenaBombillas (ifstream& archivo,  tPartida& partida) {
+    for (int i = 0; i < getNumFilas(partida.tablero);i++) {
+        for (int j = 0; j < getNumCols(partida.tablero); j++) {
+            if (esBombilla(celdaEnPos(partida.tablero, i, j))) {
+                tPosicion posicion;
+                iniciaPosicion(posicion, i, j);
+                insertar(partida.listaBombillas,  posicion);
+            }
+        }
+    }
+}
 void iniciaPartida(tPartida& partida){
-    //partida.listaBombillas = *new tListaPosiciones; revisar funcion
     iniciaListaPosiciones(partida.listaBombillas);
     iniciaTablero(partida.tablero);
-
 }
 void cargarPartida(ifstream& archivo, tPartida& partida){
     iniciaPartida(partida);
@@ -14,6 +22,8 @@ void cargarPartida(ifstream& archivo, tPartida& partida){
     archivo >> partida.nivel;
     cargarTablero(partida.tablero, archivo);
     leerYColocarBombillas(archivo, partida.tablero);
+    almacenaBombillas(archivo, partida);
+
 }
 bool operator<(const tPartida& partida, int nivel){
     return partida.nivel < nivel;
@@ -23,10 +33,12 @@ bool operator<(const tPartida& partida1, const tPartida& partida2){
 }
 bool juega(tPartida& partida, int& nIt){
     ifstream archivo;
+    ofstream archivo2;
     int x, y;
     leerYColocarBombillas(archivo, partida.tablero);
     mostrarTablero(partida.tablero);
     bool termina = estaTerminado(partida.tablero);
+    bool acaba = false;
 
     while (!termina) {
         cout << "En caso de que desee abandonar la partida introtuzca las coordenadas (-1 0)" << endl;
@@ -34,21 +46,25 @@ bool juega(tPartida& partida, int& nIt){
         cin >> x >> y;
         nIt++;
         if(esPosQuit(x,y)) {
-            termina = true; //doble bool mirar si con uno estaria bien
+            acaba = true; //doble bool mirar si con uno estaria bien
+            termina = true;
             nIt--;
         } else {
             if (reset(x, y)) { //RESET NO FUNCIONA, SE PIERDE AL VOLVER A CARGAR PARTIDA
-                leerYColocarBombillas(archivo, partida.tablero);
+                //cargarPartida(archivo, partida);
+                //leerTablero(archivo, partida.tablero);
+                cargarTablero(partida.tablero, archivo);
                 mostrarTablero(partida.tablero);
-            } else {
+            }else {
                 ejecutarPos(partida.tablero, x, y);
                 mostrarTablero(partida.tablero);
                 termina = estaTerminado(partida.tablero);
             }
         }
     }
+    almacenaBombillas(archivo, partida);
     cout << "El numero de movimientos realizados es: " << nIt<< endl;
-    return termina;
+    return acaba;
 }
 void guardarPartida (ofstream& archivo, const tPartida& partida) {
     archivo <<"LEVEL " << partida.nivel << endl;
@@ -60,6 +76,7 @@ void guardarPartida (ofstream& archivo, const tPartida& partida) {
         archivo << endl;
     }
     guardarListaBombilla(archivo, partida.listaBombillas);
+
 }
 
 

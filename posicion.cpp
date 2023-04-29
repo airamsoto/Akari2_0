@@ -10,7 +10,7 @@ bool operator== (const tPosicion& p1, const tPosicion& p2) {
 }
 
 void guardarPosicion (ofstream& archivo, const tPosicion& p) {
-    archivo << p.x << " " << p.y;
+    archivo << p.x << " " << p.y << endl;
 }
 int dameX (const tPosicion& pos) {
     return pos.x;

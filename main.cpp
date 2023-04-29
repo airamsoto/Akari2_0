@@ -5,6 +5,7 @@ int main() {
     int n, cont = 0;
     ifstream archivo;
     ofstream archivoEscr;
+    string archivoNuevo;
     tListaPartidas listaPartidas;
     tPartida partida;
     iniciaListaPartidas(listaPartidas);
@@ -31,23 +32,19 @@ int main() {
                 }
                 partida = *dameElem(listaPartidas, buscaPos(listaPartidas, aux));
             }
-
-
-
-        } /*else if ( operator<(*dameElem(listaPartidas, dameNumElem(listaPartidas)),  n)) {
-            partida = *dameElem(listaPartidas, dameNumElem(listaPartidas));
-        }*/
-        if (juega(partida, cont)) {
-            eliminarPartida(listaPartidas, partida);
-            archivoEscr.open("partidasNew.txt");
-            if (archivoEscr.is_open()) {
-                guardarListaPartidas(archivoEscr, listaPartidas);
-                //no guarda las bombillas
-                destruyePartida(partida); //no se si hay que usar destruye listapartidas
-            }
-            archivoEscr.close();
-
         }
+        if (!juega(partida, cont)) {
+            eliminarPartida(listaPartidas, partida);
+        } else {
+                insertarOrd(listaPartidas, partida);
+            }
+        cout << "Seleccione el archivo donde desea guardar la lista de partidas: ";
+        cin >> archivoNuevo;
+        archivoEscr.open(archivoNuevo);
+        if (archivoEscr.is_open()) {
+            guardarListaPartidas(archivoEscr, listaPartidas);
+        }
+        archivoEscr.close();
     }
 
     return 0;

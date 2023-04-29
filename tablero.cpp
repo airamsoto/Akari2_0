@@ -49,10 +49,9 @@ void leerYColocarBombillas(ifstream& archivo, tTablero& tab) {
 
 void mostrarTablero(const tTablero& tab) {
     tCelda c;
-    //system("cls");
-    cout << "|";
+    system("cls");
+    cout << " |";
     for (int i = 0; i < tab.nCols; i++) {
-       ;
         cout << BLUE << " " << i << RESET << " |";
     }
     cout << endl;

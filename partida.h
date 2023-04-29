@@ -1,6 +1,3 @@
-//
-// Created by airam on 18/04/2023.
-//
 
 #ifndef AKARI2_0_PARTIDA_H
 #define AKARI2_0_PARTIDA_H

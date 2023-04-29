@@ -36,13 +36,14 @@ int main() {
         if (!juega(partida, cont)) {
             eliminarPartida(listaPartidas, partida);
         } else {
-                insertarOrd(listaPartidas, partida);
+            insertarOrd(listaPartidas, partida);
             }
         cout << "Seleccione el archivo donde desea guardar la lista de partidas: ";
         cin >> archivoNuevo;
         archivoEscr.open(archivoNuevo);
         if (archivoEscr.is_open()) {
             guardarListaPartidas(archivoEscr, listaPartidas);
+            destruyeListaPartidas(listaPartidas);
         }
         archivoEscr.close();
     }

@@ -1,5 +1,24 @@
 #include "partida.h"
+void reset (tTablero& tablero) {
+    for (int i = 0; i < getNumFilas(tablero); i++) {
+        for (int j = 0; j < getNumCols(tablero); j++) {
+            if (estaIluminada(celdaEnPos(tablero, i, j)) || esBombilla(celdaEnPos(tablero, i, j))) {
+                apagaCelda(tablero.tablero[i][j]);
+            }
+        }
 
+    }
+}
+/*void reset (tPartida &partida) {
+    for (int i = 0; i < getNumFilas(partida.tablero); i++) {
+        for (int j = 0; j < getNumCols(partida.tablero); j++) {
+            if (estaIluminada(celdaEnPos(partida.tablero, i, j)) || esBombilla(celdaEnPos(partida.tablero, i, j))) {
+                apagaCelda(partida.tablero.tablero[i][j]);
+            }
+        }
+
+    }
+}*/
 void almacenaBombillas (ifstream& archivo,  tPartida& partida) {
     for (int i = 0; i < getNumFilas(partida.tablero);i++) {
         for (int j = 0; j < getNumCols(partida.tablero); j++) {
@@ -53,7 +72,8 @@ bool juega(tPartida& partida, int& nIt){
             if (reset(x, y)) { //RESET NO FUNCIONA, SE PIERDE AL VOLVER A CARGAR PARTIDA
                 //cargarPartida(archivo, partida);
                 //leerTablero(archivo, partida.tablero);
-                cargarTablero(partida.tablero, archivo);
+                //cargarTablero(partida.tablero, archivo);
+                reset(partida.tablero);
                 mostrarTablero(partida.tablero);
             }else {
                 ejecutarPos(partida.tablero, x, y);

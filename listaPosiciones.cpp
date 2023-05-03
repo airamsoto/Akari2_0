@@ -39,8 +39,10 @@ tPosicion dameElem (const tListaPosiciones& lp, int i) {
 void guardarListaBombilla  (ofstream& archivo, const tListaPosiciones& lp) {
     archivo << dameNumElem(lp) << endl;
     for (int i = 0; i < lp.cont; i++) {
-        if (!operator== (lp.arrayPos[i], lp.arrayPos[i+1]))
-        guardarPosicion(archivo, dameElem(lp, i));
+        if (!operator== (lp.arrayPos[i], lp.arrayPos[i+1])) {
+            guardarPosicion(archivo, dameElem(lp, i));
+        }
+
     }
 }
 
@@ -57,7 +59,7 @@ void eliminar (tListaPosiciones& lp, const tPosicion& pos) { //en teoria no hace
         }
     }
     for (int j = aux; j < lp.cont; j++) {
-        lp.arrayPos[aux] = lp.arrayPos[aux+1];
+        lp.arrayPos[j] = lp.arrayPos[j+1];
     }
     lp.cont--;
 }

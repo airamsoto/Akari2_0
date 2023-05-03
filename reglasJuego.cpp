@@ -1,4 +1,5 @@
 #include "reglasJuego.h"
+
 using namespace std;
 int bombillasAlosLados(const tTablero& tab, int x, int y) {
     int bombillas = 0;
@@ -111,6 +112,7 @@ bool esPosQuit(int x, int y) {
 }
 
 void ejecutarPos(tTablero& tab, int x, int y) {
+
     tCelda c = celdaEnPos(tab, x, y);
     if (esBombilla(c)) {
         apagaCelda(c);

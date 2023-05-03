@@ -6,13 +6,25 @@ void iniciaListaPartidas(tListaPartidas& listaPartidas) {
         listaPartidas.datos[i] = new tPartida;
     }
 }
+void ordenaPartidas (tListaPartidas& listaPartidas) {
+    for (int i = 1; i < listaPartidas.nElem; i++) {
+        tPtrPartida aux = listaPartidas.datos[i];
+        int j = i;
+        while ( j > 0 && operator<(*aux , *listaPartidas.datos[j-1])) {
+            listaPartidas.datos[j] = listaPartidas.datos[j-1];
+            j--;
+        }
+        listaPartidas.datos[j] = aux;
+    }
+}
 void cargarListaPartidas(ifstream& archivo, tListaPartidas& listaPartidas) {
         archivo >> listaPartidas.nElem;
         for (int i = 0; i < listaPartidas.nElem; ++i) {
             cargarPartida(archivo, *listaPartidas.datos[i]);
         }
-
+    ordenaPartidas(listaPartidas);
 }
+
 
 void insertarOrd(tListaPartidas& listaPartidas, const tPartida& partida) {
    int i = listaPartidas.nElem;

@@ -8,6 +8,7 @@ void reset (tTablero& tablero) {
         }
 
     }
+
 }
 
 void almacenaBombillas (tPartida& partida) {
@@ -72,6 +73,7 @@ bool juega(tPartida& partida, int& nIt){
             tPosicion posicion;
             iniciaPosicion(posicion, x, y);
             eliminar(partida.listaBombillas, posicion);
+
         } else {
             guardaBombilla(partida,x,y);
         }
@@ -83,6 +85,7 @@ bool juega(tPartida& partida, int& nIt){
             if (reset(x, y)) {
                 reset(partida.tablero);
                 mostrarTablero(partida.tablero);
+                destruyeListaPosiciones(partida.listaBombillas);
             }else {
 
                 ejecutarPos(partida.tablero, x, y);

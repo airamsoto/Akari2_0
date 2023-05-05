@@ -27,15 +27,16 @@ void cargarListaPartidas(ifstream& archivo, tListaPartidas& listaPartidas) {
 
 
 void insertarOrd(tListaPartidas& listaPartidas, const tPartida& partida) {
-   int i = listaPartidas.nElem;
-   tPtrPartida punteroPartida = listaPartidas.datos[listaPartidas.nElem];
-   *punteroPartida = partida;
-   while ( i > 0 && !operator<(*listaPartidas.datos[i - 1], partida)) {
-       listaPartidas.datos[i] = listaPartidas.datos[i-1];
-       i--;
-   }
-   listaPartidas.datos[i] = punteroPartida;
-   listaPartidas.datos[i+1] = listaPartidas.datos[i+2];
+    int i= 0;
+    bool esMenor= true;
+    while (i < listaPartidas.nElem && esMenor){
+        esMenor = operator<(*listaPartidas.datos[i], partida);
+        if (!esMenor){
+            *listaPartidas.datos[i]= partida;
+        } else{
+            i++;
+        }
+    }
 }
 
 int buscaPos(const tListaPartidas& listaPartidas, int nivel) {

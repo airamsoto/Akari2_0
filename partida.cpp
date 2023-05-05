@@ -86,6 +86,7 @@ bool juega(tPartida& partida, int& nIt){
                 reset(partida.tablero);
                 mostrarTablero(partida.tablero);
                 destruyeListaPosiciones(partida.listaBombillas);
+                //iniciaListaPosiciones(partida.listaBombillas);
             }else {
                 ejecutarPos(partida.tablero, x, y);
                 mostrarTablero(partida.tablero);

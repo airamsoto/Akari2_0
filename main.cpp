@@ -16,6 +16,7 @@ int main() {
         cin >> n;
         if (buscaPos(listaPartidas, n) != -1) {
             partida = *dameElem(listaPartidas, buscaPos(listaPartidas, n));
+            //*listaPartidas.datos[buscaPos(listaPartidas,n)] = partida;
         }
         else if(buscaPos(listaPartidas, n) == -1) {
             if ( operator<(*dameElem(listaPartidas, dameNumElem(listaPartidas)),  n)) {

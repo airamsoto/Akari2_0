@@ -3,7 +3,7 @@ void reset (tTablero& tablero) {
     for (int i = 0; i < getNumFilas(tablero); i++) {
         for (int j = 0; j < getNumCols(tablero); j++) {
             if (estaIluminada(celdaEnPos(tablero, i, j)) || esBombilla(celdaEnPos(tablero, i, j))) {
-                apagaCelda(tablero.tablero[i][j]);
+                ejecutarPos(tablero, i, j);
             }
         }
 
@@ -87,7 +87,6 @@ bool juega(tPartida& partida, int& nIt){
                 mostrarTablero(partida.tablero);
                 destruyeListaPosiciones(partida.listaBombillas);
             }else {
-
                 ejecutarPos(partida.tablero, x, y);
                 mostrarTablero(partida.tablero);
                 termina = estaTerminado(partida.tablero);
@@ -95,7 +94,6 @@ bool juega(tPartida& partida, int& nIt){
             }
         }
     }
-
     cout << "El numero de movimientos realizados es: " << nIt<< endl;
     return acaba;
 }

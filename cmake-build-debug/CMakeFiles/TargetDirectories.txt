@@ -1,3 +1,0 @@
-C:/Users/airam/CLionProjects/Akari2.0/cmake-build-debug/CMakeFiles/Akari2_0.dir
-C:/Users/airam/CLionProjects/Akari2.0/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/airam/CLionProjects/Akari2.0/cmake-build-debug/CMakeFiles/rebuild_cache.dir
